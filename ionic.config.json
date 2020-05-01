@@ -1,5 +1,7 @@
 {
   "name": "PWATest",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

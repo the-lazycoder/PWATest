@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Deeplinks } from '@ionic-native/deeplinks/ngx';
+import { FolderPage } from './folder/folder.page';
+import { HomePage } from './home/home.page';
 
 @Component({
   selector: 'app-root',
@@ -48,7 +51,8 @@ export class AppComponent implements OnInit {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private deeplinks: Deeplinks
   ) {
     this.initializeApp();
   }
@@ -65,5 +69,18 @@ export class AppComponent implements OnInit {
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
+
+    this.deeplinks.route({
+      '/:id': HomePage
+    }).subscribe(match => {
+      // match.$route - the route we matched, which is the matched entry from the arguments to route()
+      // match.$args - the args passed in the link
+      // match.$link - the full link data
+      console.log('Successfully matched route', match);
+    }, nomatch => {
+      // nomatch.$link - the full link data
+      console.error('Got a deeplink that didn\'t match', nomatch);
+    })
   }
+
 }

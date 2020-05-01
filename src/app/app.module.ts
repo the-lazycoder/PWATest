@@ -25,7 +25,8 @@ import { environment } from '../environments/environment';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: APP_BASE_HREF, useValue: window['_app_base'] || '/' }
+    // { provide: APP_BASE_HREF, useValue: window['_app_base'] || '/' }
+    { provide: APP_BASE_HREF, useValue: window['base-href'] }
   ],
   bootstrap: [AppComponent]
 })

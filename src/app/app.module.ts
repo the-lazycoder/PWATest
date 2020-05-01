@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { APP_BASE_HREF, Location } from '@angular/common';
+// import { APP_BASE_HREF, Location } from '@angular/common';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -24,9 +24,9 @@ import { environment } from '../environments/environment';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     // { provide: APP_BASE_HREF, useValue: window['_app_base'] || '/' }
-    { provide: APP_BASE_HREF, useValue: window['base-href'] }
+    // { provide: APP_BASE_HREF, useValue: window['base-href'] }
   ],
   bootstrap: [AppComponent]
 })

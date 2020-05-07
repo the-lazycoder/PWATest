@@ -31,12 +31,12 @@ export class HomePage implements OnInit {
       },
       theme: {
         color: '#F37254'
+      },
+      modal: {
+        ondismiss: function () {
+          alert('dismissed')
+        }
       }
-      // modal: {
-      //   ondismiss: function () {
-      //     alert('dismissed')
-      //   }
-      // }
     };
 
     

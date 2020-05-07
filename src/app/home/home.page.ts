@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
     ) { }
 
   payWithRazorpay() {
-    var options = {
+    var options:any = {
       description: 'Credits towards consultation',
       image: 'https://i.imgur.com/3g7nmJC.png',
       currency: "INR", // your 3 letter currency code
@@ -39,15 +39,18 @@ export class HomePage implements OnInit {
       // }
     };
 
-    var rzp1 = new this.winRef.nativeWindow.Razorpay(options, successCallback, cancelCallback);
+    
+    options.handler = ((response) => {
+      console.log('handler:',response);
+      options['payment_response_id'] = response.razorpay_payment_id;
+      // this.paymentService.payWithRazor({cart: finalObj, payment: options});
+    });
+    options.modal.ondismiss = ((error) => {
+      console.log('ondismiss:',error);
+        // this.loginService.SetLoader = false;
+    });
 
-    var successCallback = function (payment_id) {
-      alert('payment_id: ' + payment_id);
-    };
-
-    var cancelCallback = function (error) {
-      alert(error.description + ' (Error ' + error.code + ')');
-    };
+    var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
 
     rzp1.open();
   }

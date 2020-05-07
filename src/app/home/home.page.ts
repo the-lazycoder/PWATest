@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { WindowRef } from '../WindowRef';
 
 declare var RazorpayCheckout:any;
 
@@ -12,7 +13,7 @@ export class HomePage implements OnInit {
 
   public title: string;
 
-  constructor(private activatedRoute:ActivatedRoute) { }
+  constructor(private activatedRoute:ActivatedRoute, private winRef:WindowRef) { }
 
   payWithRazorpay() {
     var options = {
@@ -29,23 +30,16 @@ export class HomePage implements OnInit {
       },
       theme: {
         color: '#F37254'
-      },
-      modal: {
-        ondismiss: function () {
-          alert('dismissed')
-        }
       }
+      // modal: {
+      //   ondismiss: function () {
+      //     alert('dismissed')
+      //   }
+      // }
     };
 
-    var successCallback = function (payment_id) {
-      alert('payment_id: ' + payment_id);
-    };
-
-    var cancelCallback = function (error) {
-      alert(error.description + ' (Error ' + error.code + ')');
-    };
-
-    RazorpayCheckout.open(options, successCallback, cancelCallback);
+    var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
+    rzp1.open();
   }
 
   

@@ -11,6 +11,8 @@ import { WindowRef } from '../WindowRef';
 export class HomePage implements OnInit {
 
   public title: string;
+  public longitude: number = 0;
+  public latitude: number = 0;
 
   constructor(private activatedRoute:ActivatedRoute
     , private winRef:WindowRef
@@ -41,23 +43,37 @@ export class HomePage implements OnInit {
 
     
     options.handler = ((response) => {
-      console.log('handler:',response);
+      console.log('handler:',response.razorpay_payment_id);
       options['payment_response_id'] = response.razorpay_payment_id;
       // this.paymentService.payWithRazor({cart: finalObj, payment: options});
     });
-    options.modal.ondismiss = ((error) => {
-      console.log('ondismiss:',error);
-        // this.loginService.SetLoader = false;
-    });
-
+    
     var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
 
     rzp1.open();
   }
 
+  getLocation(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position)=>{
+          this.longitude = position.coords.longitude;
+          this.latitude = position.coords.latitude;
+          console.log(this.longitude + ' ' + this.latitude);
+        });
+    } else {
+       console.log("No support for geolocation");
+    }
+  }
+
+  // callApi(Longitude: number, Latitude: number){
+  //   const url = `https://api-adresse.data.gouv.fr/reverse/?lon=${Longitude}&lat=${Latitude}`
+  //   //Call API
+  // }
+
   
   ngOnInit() {
     this.title = this.activatedRoute.snapshot.paramMap.get('id');
+    this.getLocation();
   }
 
 }

@@ -6,6 +6,7 @@ import { WindowRef } from '../WindowRef';
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  providers: [ WindowRef ],
 })
 export class HomePage implements OnInit {
 

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WindowRef } from '../WindowRef';
 
-declare var RazorpayCheckout:any;
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -13,7 +11,9 @@ export class HomePage implements OnInit {
 
   public title: string;
 
-  constructor(private activatedRoute:ActivatedRoute, private winRef:WindowRef) { }
+  constructor(private activatedRoute:ActivatedRoute
+    , private winRef:WindowRef
+    ) { }
 
   payWithRazorpay() {
     var options = {

@@ -39,7 +39,8 @@ export class HomePage implements OnInit {
       // }
     };
 
-    var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
+    var rzp1 = new this.winRef.nativeWindow.Razorpay(options, successCallback, cancelCallback);
+
     var successCallback = function (payment_id) {
       alert('payment_id: ' + payment_id);
     };
@@ -48,7 +49,7 @@ export class HomePage implements OnInit {
       alert(error.description + ' (Error ' + error.code + ')');
     };
 
-    rzp1.open(options, successCallback, cancelCallback);
+    rzp1.open();
   }
 
   

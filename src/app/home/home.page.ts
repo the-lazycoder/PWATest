@@ -40,7 +40,15 @@ export class HomePage implements OnInit {
     };
 
     var rzp1 = new this.winRef.nativeWindow.Razorpay(options);
-    rzp1.open();
+    var successCallback = function (payment_id) {
+      alert('payment_id: ' + payment_id);
+    };
+
+    var cancelCallback = function (error) {
+      alert(error.description + ' (Error ' + error.code + ')');
+    };
+
+    rzp1.open(options, successCallback, cancelCallback);
   }
 
   
